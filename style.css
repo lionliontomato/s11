@@ -1,0 +1,703 @@
+
+:root{
+  --blue-900:#405969; --blue-800:#526d7e; --blue-700:#6f8795; --blue-600:#839aa8;
+  --blue-300:#cbd8df; --blue-200:#dbe5e9; --blue-100:#eef4f6;
+  --cream:#f8f5ef; --ink:#31434d; --muted:#70818b; --white:rgba(255,255,255,.78);
+  --shadow:0 18px 45px rgba(64,89,105,.18); --radius:26px;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+/* 最新標題尚未從 Google 試算表確認前先隱藏 */
+.settings-pending #siteTitle,
+.settings-pending #siteSubtitle{
+  visibility:hidden;
+}
+
+body{
+  margin:0;min-height:100vh;color:var(--ink);
+  font-family:'Zen Maru Gothic','Noto Serif TC',system-ui,sans-serif;
+  overflow-x:hidden;background-color:#160d20;
+  background-image:linear-gradient(rgba(12,5,18,.08),rgba(12,5,18,.18)),url('./assets/nian-bg-desktop.webp?v=20261107-sophie1');
+  background-size:cover;background-position:center center;background-repeat:no-repeat;background-attachment:fixed;
+}
+
+.float-layer{
+  position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0;
+}
+
+.float{
+  position:absolute;bottom:-8vh;left:var(--left);font-size:clamp(18px,2.5vw,32px);
+  opacity:.22;color:rgba(64,89,105,.36);filter:drop-shadow(0 8px 12px rgba(64,89,105,.14));
+  animation:rise var(--dur) linear infinite;animation-delay:var(--delay);
+}
+
+@keyframes rise{
+  0%{transform:translateY(0) rotate(0deg);opacity:0}
+  18%{opacity:.25}
+  72%{opacity:.19}
+  100%{transform:translateY(-112vh) rotate(180deg);opacity:0}
+}
+
+.wrap{
+  position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:42px 20px 70px;
+}
+
+.hero{
+  padding:34px;border-radius:36px;
+  background:linear-gradient(135deg,rgba(255,255,255,.82),rgba(238,244,246,.73));
+  box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.80);
+  -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
+  text-align:center;display:flex;flex-direction:column;align-items:center;
+}
+
+.eyebrow{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:0;border-radius:0;background:transparent;margin:0 auto;text-align:center;
+}
+
+.eyebrow img{
+  display:block;width:36px;height:36px;object-fit:contain;
+  filter:drop-shadow(0 4px 8px rgba(64,89,105,.12));
+}
+
+.hero h1{
+  font-family:'Noto Serif TC',serif;font-size:clamp(36px,6vw,68px);line-height:1.1;
+  margin:20px 0 12px;color:var(--blue-900);letter-spacing:.06em;text-align:center;width:100%;
+}
+
+.hero p{
+  margin:0;color:var(--muted);font-size:17px;line-height:1.9;text-align:center;width:100%;
+}
+
+.controls{
+  display:grid;grid-template-columns:1fr auto;gap:16px;margin:26px 0 18px;width:100%;
+}
+
+.search{
+  width:100%;border:0;outline:0;border-radius:999px;background:rgba(255,255,255,.88);
+  padding:16px 20px;font-size:16px;color:var(--ink);
+  box-shadow:inset 0 0 0 1px rgba(111,135,149,.18),0 10px 22px rgba(64,89,105,.08);
+  font-family:inherit;
+}
+
+.search:focus-visible,
+.tag:focus-visible,
+.random:focus-visible,
+.copy:focus-visible,
+.close:focus-visible,
+#copyPickBtn:focus-visible{
+  outline:3px solid #75a5c6;
+  outline-offset:3px;
+}
+
+.random{
+  border:0;border-radius:999px;padding:0 22px;background:linear-gradient(135deg,#6f8795,#9aaeb8);
+  color:white;font-family:inherit;font-weight:800;font-size:16px;cursor:pointer;
+  box-shadow:0 14px 30px rgba(64,89,105,.23);transition:.22s;
+}
+
+.random:hover:not(:disabled){
+  transform:translateY(-2px);
+}
+
+.random:disabled{
+  opacity:.55;cursor:not-allowed;
+}
+
+.tags{
+  display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 26px;width:100%;
+}
+
+.tags:empty{
+  margin:0;
+}
+
+.tag{
+  --tag:#8fa3ad;--tagLight:#eef3f5;
+  border:1px solid rgba(82,109,126,.14);
+  background:linear-gradient(135deg,rgba(255,255,255,.84),var(--tagLight));
+  color:#526b78;padding:10px 16px;border-radius:999px;
+  font-family:inherit;font-weight:800;cursor:pointer;
+  box-shadow:0 9px 18px rgba(64,89,105,.08);transition:.22s;
+}
+
+.tag:hover{
+  transform:translateY(-2px);
+  box-shadow:0 13px 26px rgba(64,89,105,.14);
+}
+
+.tag.active{
+  background:linear-gradient(135deg,var(--tag),#506a7a);
+  color:white;border-color:transparent;
+  box-shadow:0 15px 28px rgba(64,89,105,.25);
+  transform:translateY(-2px);
+}
+
+.meta{
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  margin:6px 2px 18px;width:100%;color:#6b7c86;font-weight:700;text-align:center;
+}
+
+#count{
+  display:block;width:100%;text-align:center;
+}
+
+.grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;
+}
+
+.card{
+  position:relative;min-height:150px;padding:22px 18px 56px;border-radius:var(--radius);
+  background:linear-gradient(145deg,rgba(255,255,255,.86),rgba(236,243,246,.78));
+  border:1px solid rgba(255,255,255,.86);
+  box-shadow:0 15px 32px rgba(64,89,105,.12);
+  overflow:hidden;transition:.22s;isolation:isolate;
+  -webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);
+}
+
+.card:hover{
+  transform:translateY(-4px);
+}
+
+.decor-fish{
+  position:absolute;right:15px;top:12px;width:56px;height:56px;padding:6px;object-fit:contain;
+  border-radius:18px;background:rgba(111,135,149,.10);
+  border:1px solid rgba(111,135,149,.10);
+  box-shadow:0 10px 22px rgba(64,89,105,.08);
+  opacity:.63;transform:rotate(-10deg);
+  pointer-events:none;z-index:0;
+}
+
+.song,.artist,.cat{
+  position:relative;z-index:1;
+}
+
+.song{
+  font-family:'Noto Serif TC',serif;font-size:24px;font-weight:700;color:var(--blue-900);
+  margin:0 0 9px;padding-right:70px;overflow-wrap:anywhere;
+}
+
+.artist{
+  font-size:15px;color:var(--muted);font-weight:700;
+  margin-bottom:12px;overflow-wrap:anywhere;
+}
+
+.cat{
+  display:inline-flex;max-width:100%;padding:6px 11px;border-radius:999px;
+  background:rgba(111,135,149,.13);color:#5e7480;
+  font-size:13px;font-weight:700;line-height:1.5;
+}
+
+.copy{
+  position:absolute;right:14px;bottom:14px;z-index:2;
+  border:0;border-radius:999px;padding:8px 13px;
+  background:#dae5e9;color:#526b78;
+  font-family:inherit;font-weight:800;cursor:pointer;transition:.2s;
+}
+
+.copy:hover{
+  background:#c3d2d9;
+}
+
+.copy.done{
+  background:#7f9aaa;color:#fff;
+}
+
+.empty{
+  display:none;text-align:center;padding:44px;border-radius:26px;
+  background:rgba(255,255,255,.77);
+  color:#70818b;font-weight:700;
+}
+
+/* 隨機抽歌視窗 */
+
+.modal{
+  position:fixed;inset:0;z-index:8;display:none;place-items:center;
+  background:rgba(42,57,66,.28);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  padding:18px;
+}
+
+.modal.show{
+  display:grid;
+}
+
+.modal-card{
+  max-width:420px;width:100%;
+  background:linear-gradient(135deg,#fff,#eef4f6);
+  border-radius:30px;padding:30px;
+  box-shadow:0 30px 70px rgba(42,57,66,.28);
+  text-align:center;
+}
+
+.modal-fish{
+  margin:0 auto 6px;display:block;opacity:.84;
+}
+
+.modal h2{
+  font-family:'Noto Serif TC',serif;
+  margin:0 0 12px;color:#405969;
+}
+
+.modal .big{
+  font-size:30px;font-family:'Noto Serif TC',serif;font-weight:700;
+  margin:12px 0;color:#405969;overflow-wrap:anywhere;
+}
+
+/*
+ * 新增：隨機抽歌結果複製按鈕
+ * 與下方歌曲卡片的複製功能使用相同配色
+ */
+
+#copyPickBtn{
+  display:block;
+  width:100%;
+  margin-top:22px;
+  padding:12px 20px;
+  border:0;
+  border-radius:999px;
+  background:#dae5e9;
+  color:#526b78;
+  font-family:inherit;
+  font-size:15px;
+  font-weight:800;
+  line-height:1.5;
+  cursor:pointer;
+  transition:background .2s,transform .2s;
+}
+
+#copyPickBtn:hover{
+  background:#c3d2d9;
+  transform:translateY(-1px);
+}
+
+#copyPickBtn.done{
+  background:#7f9aaa;
+  color:#fff;
+}
+
+#copyPickBtn.done:hover{
+  background:#7f9aaa;
+}
+
+/* 原本的確認按鈕 */
+
+.close{
+  margin-top:16px;border:0;border-radius:999px;
+  background:#6f8795;color:white;
+  padding:11px 20px;font-family:inherit;font-weight:800;cursor:pointer;
+}
+
+/* 網站頁尾 */
+
+.site-footer{
+  position:relative;z-index:2;max-width:980px;
+  margin:40px auto 24px;padding:22px 18px;
+  text-align:center;font-family:'Zen Maru Gothic','Noto Serif TC',serif;
+  color:rgba(48,70,84,.86);
+  font-size:14px;line-height:1.8;
+}
+
+.site-footer p{
+  margin:4px 0;
+}
+
+.site-footer a{
+  color:rgba(48,70,84,.95);
+  text-decoration:none;
+  border-bottom:1px solid rgba(48,70,84,.35);
+}
+
+.site-footer a:hover{
+  opacity:.75;
+}
+
+.sr-only{
+  position:absolute;width:1px;height:1px;overflow:hidden;
+  clip:rect(0,0,0,0);white-space:nowrap;
+}
+
+/* 平板與手機版 */
+
+@media(max-width:768px){
+  body{
+    background-image:linear-gradient(rgba(12,5,18,.10),rgba(12,5,18,.22)),url('./assets/nian-bg-mobile.webp?v=20261107-sophie1');
+    background-size:100% auto;
+    background-position:center bottom;
+    background-attachment:scroll;
+    background-repeat:no-repeat;
+  }
+
+  .float{
+    font-size:clamp(16px,5vw,26px);
+    opacity:.20;
+  }
+}
+
+@media(max-width:680px){
+  .wrap{
+    padding:24px 14px 50px;
+  }
+
+  .hero{
+    padding:24px 18px;
+    border-radius:28px;
+  }
+
+  .controls{
+    grid-template-columns:1fr;
+  }
+
+  .random{
+    height:50px;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .tag{
+    padding:10px 13px;
+  }
+
+  .decor-fish{
+    right:14px;top:12px;
+    width:52px;height:52px;
+  }
+
+  .song{
+    padding-right:64px;
+  }
+
+  /* 手機版複製按鈕 */
+  #copyPickBtn{
+    font-size:14px;
+    padding:12px 14px;
+  }
+}
+
+@media(max-width:480px){
+  .float{
+    opacity:.15;
+  }
+
+  .hero h1{
+    letter-spacing:.025em;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation:none!important;
+    scroll-behavior:auto!important;
+    transition:none!important;
+  }
+}
+
+
+/* 蘇菲紫夜主題：只調整配色與表面質感，不更動原版尺寸、間距或斷點 */
+:root{
+  --blue-900:#f1e6fb;
+  --blue-800:#dfc9f2;
+  --blue-700:#c5a5e0;
+  --blue-600:#ae8bcf;
+  --blue-300:#80649b;
+  --blue-200:#604878;
+  --blue-100:#39264d;
+  --cream:#21142d;
+  --ink:#f0e6f8;
+  --muted:#c5b2d5;
+  --white:rgba(43,26,59,.84);
+  --shadow:0 18px 45px rgba(5,0,12,.38);
+}
+
+body{
+  color:var(--ink);
+}
+
+.float{
+  color:rgba(218,185,247,.48);
+  filter:drop-shadow(0 8px 12px rgba(15,5,25,.32));
+}
+
+.hero{
+  background:linear-gradient(135deg,rgba(47,27,65,.90),rgba(31,17,45,.86));
+  border:1px solid rgba(216,185,245,.24);
+  box-shadow:0 18px 45px rgba(5,0,12,.38);
+}
+
+.hero h1,
+.song{
+  color:#f3e8ff;
+}
+
+.hero p,
+.artist{
+  color:#d0bddf;
+}
+
+.search{
+  background:rgba(24,13,36,.88);
+  color:#f5eaff;
+  box-shadow:inset 0 0 0 1px rgba(198,157,230,.28),0 10px 22px rgba(5,0,12,.24);
+}
+
+.search::placeholder{
+  color:#bba5ce;
+}
+
+.search:focus-visible,
+.tag:focus-visible,
+.random:focus-visible,
+.copy:focus-visible,
+.close:focus-visible,
+#copyPickBtn:focus-visible{
+  outline-color:#d7b4fa;
+}
+
+.random{
+  background:linear-gradient(135deg,#765095,#a27ac4);
+  box-shadow:0 14px 30px rgba(12,4,22,.42);
+}
+
+.tag{
+  border-color:rgba(197,157,226,.28);
+  background:linear-gradient(135deg,rgba(64,42,83,.96),rgba(48,29,67,.96));
+  color:#eadcf6;
+  box-shadow:0 9px 18px rgba(5,0,12,.25);
+}
+
+.tag.active{
+  background:linear-gradient(135deg,var(--tag),#593879);
+  color:#fff;
+  border-color:rgba(239,221,255,.42);
+  box-shadow:0 15px 28px rgba(5,0,12,.38);
+}
+
+.meta{
+  color:#d2c0e0;
+}
+
+.card{
+  background:linear-gradient(145deg,rgba(48,29,66,.91),rgba(29,17,43,.89));
+  border:1px solid rgba(211,177,239,.25);
+  box-shadow:0 15px 32px rgba(5,0,12,.34);
+}
+
+.decor-fish{
+  background:rgba(183,139,216,.13);
+  border-color:rgba(211,177,239,.22);
+  box-shadow:0 10px 22px rgba(5,0,12,.25);
+  opacity:.9;
+}
+
+.cat{
+  background:rgba(178,137,210,.20);
+  color:#e5d2f4;
+}
+
+.copy,
+#copyPickBtn{
+  background:#604477;
+  color:#f4eaff;
+}
+
+.copy:hover,
+#copyPickBtn:hover{
+  background:#79569a;
+}
+
+.copy.done,
+#copyPickBtn.done,
+#copyPickBtn.done:hover{
+  background:#9b78bc;
+  color:#fff;
+}
+
+.empty{
+  background:rgba(39,23,54,.90);
+  border:1px solid rgba(211,177,239,.24);
+  color:#e2d1f0;
+}
+
+.modal{
+  background:rgba(8,3,14,.62);
+}
+
+.modal-card{
+  background:linear-gradient(135deg,#352147,#21142f);
+  border:1px solid rgba(220,190,246,.28);
+  box-shadow:0 30px 70px rgba(4,0,9,.58);
+  color:#f1e6fb;
+}
+
+.modal h2,
+.modal .big{
+  color:#f2e5ff;
+}
+
+#copyPickBtn{
+  background:#604477;
+  color:#f4eaff;
+}
+
+#copyPickBtn:hover{
+  background:#79569a;
+}
+
+#copyPickBtn.done,
+#copyPickBtn.done:hover{
+  background:#9b78bc;
+  color:#fff;
+}
+
+.close{
+  background:linear-gradient(135deg,#765095,#a27ac4);
+  color:#fff;
+}
+
+.site-footer{
+  color:rgba(232,216,246,.88);
+}
+
+.site-footer a{
+  color:#e7d4f7;
+  border-bottom-color:rgba(220,190,246,.52);
+}
+
+@media(max-width:768px){
+  .float{
+    color:rgba(218,185,247,.42);
+  }
+}
+
+
+/* 歌曲卡片：以紫夜為主色，加入低飽和莓果、藍灰與暖香檳點綴 */
+.card{
+  background:linear-gradient(145deg,rgba(52,34,70,.94),rgba(31,21,45,.92));
+  border-color:rgba(214,190,231,.26);
+}
+
+/* 低對比度的輪替色，讓卡片有層次但不跳出整體紫夜氛圍 */
+.card:nth-child(4n + 2){
+  background:linear-gradient(145deg,rgba(48,43,72,.94),rgba(28,25,48,.92));
+  border-color:rgba(174,174,218,.27);
+}
+
+.card:nth-child(4n + 3){
+  background:linear-gradient(145deg,rgba(68,39,67,.94),rgba(39,22,47,.92));
+  border-color:rgba(220,174,202,.26);
+}
+
+.card:nth-child(4n + 4){
+  background:linear-gradient(145deg,rgba(54,43,66,.94),rgba(34,27,46,.92));
+  border-color:rgba(201,183,218,.26);
+}
+
+.card .song{
+  color:#f5eafa;
+}
+
+.card:nth-child(4n + 2) .song{
+  color:#e9e9ff;
+}
+
+.card:nth-child(4n + 3) .song{
+  color:#ffeaf2;
+}
+
+.card:nth-child(4n + 4) .song{
+  color:#f4e9dc;
+}
+
+.card .artist{
+  color:#cbbbd8;
+}
+
+.card:nth-child(4n + 3) .artist{
+  color:#d9b9cc;
+}
+
+.card .cat{
+  background:rgba(207,174,226,.17);
+  color:#e7d5f2;
+  border:1px solid rgba(219,193,236,.14);
+}
+
+.card:nth-child(4n + 2) .cat{
+  background:rgba(169,174,220,.16);
+  color:#dfe0fb;
+  border-color:rgba(190,194,235,.16);
+}
+
+.card:nth-child(4n + 3) .cat{
+  background:rgba(218,164,193,.15);
+  color:#f4d8e5;
+  border-color:rgba(226,185,205,.16);
+}
+
+.card:nth-child(4n + 4) .cat{
+  background:rgba(210,184,148,.14);
+  color:#f0dfc8;
+  border-color:rgba(222,198,166,.15);
+}
+
+.card .decor-fish{
+  background:rgba(202,166,226,.13);
+  border-color:rgba(221,194,238,.22);
+}
+
+.card:nth-child(4n + 2) .decor-fish{
+  background:rgba(166,172,220,.13);
+  border-color:rgba(190,195,235,.22);
+}
+
+.card:nth-child(4n + 3) .decor-fish{
+  background:rgba(218,160,190,.13);
+  border-color:rgba(230,188,207,.22);
+}
+
+.card:nth-child(4n + 4) .decor-fish{
+  background:rgba(211,182,143,.12);
+  border-color:rgba(225,200,169,.20);
+}
+
+.card .copy{
+  background:#634a78;
+  color:#f6edfc;
+}
+
+.card .copy:hover{
+  background:#7b5b91;
+}
+
+.card:nth-child(4n + 2) .copy{
+  background:#555778;
+}
+
+.card:nth-child(4n + 2) .copy:hover{
+  background:#6c6f98;
+}
+
+.card:nth-child(4n + 3) .copy{
+  background:#79516c;
+}
+
+.card:nth-child(4n + 3) .copy:hover{
+  background:#936781;
+}
+
+.card:nth-child(4n + 4) .copy{
+  background:#76634e;
+}
+
+.card:nth-child(4n + 4) .copy:hover{
+  background:#90795f;
+}
+
+.card .copy.done{
+  background:#9b78bc;
+  color:#fff;
+}
