@@ -574,131 +574,81 @@ body{
 }
 
 
-/* 歌曲卡片：以紫夜為主色，加入低飽和莓果、藍灰與暖香檳點綴 */
+/* 歌曲卡片：更淡、更透，可微微看見整體頁面背景；僅調整歌曲卡片外觀 */
 .card{
-  background:linear-gradient(145deg,rgba(151,119,178,.54),rgba(83,58,105,.52));
-  border-color:rgba(226,207,241,.34);
-  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  background:linear-gradient(145deg,rgba(192,173,210,.10),rgba(84,69,108,.06));
+  border:1px solid rgba(244,235,250,.16);
+  box-shadow:0 8px 20px rgba(5,0,12,.08),inset 0 1px 0 rgba(255,255,255,.08);
+  -webkit-backdrop-filter:blur(12px) saturate(118%);
+  backdrop-filter:blur(12px) saturate(118%);
 }
-
-/* 低對比度的輪替色，讓卡片有層次但不跳出整體紫夜氛圍 */
 .card:nth-child(4n + 2){
-  background:linear-gradient(145deg,rgba(132,139,184,.53),rgba(69,68,112,.51));
-  border-color:rgba(207,211,244,.34);
+  background:linear-gradient(145deg,rgba(172,179,217,.10),rgba(72,77,125,.06));
+  border-color:rgba(232,236,252,.16);
 }
-
 .card:nth-child(4n + 3){
-  background:linear-gradient(145deg,rgba(173,117,153,.52),rgba(99,56,91,.50));
-  border-color:rgba(240,204,224,.34);
+  background:linear-gradient(145deg,rgba(205,168,186,.09),rgba(108,70,96,.06));
+  border-color:rgba(249,230,239,.15);
 }
-
 .card:nth-child(4n + 4){
-  background:linear-gradient(145deg,rgba(158,139,157,.52),rgba(86,70,97,.50));
-  border-color:rgba(230,215,235,.34);
+  background:linear-gradient(145deg,rgba(198,184,200,.09),rgba(96,82,110,.06));
+  border-color:rgba(243,233,246,.15);
 }
-
-.card .song{
-  color:#f5eafa;
-}
-
-.card:nth-child(4n + 2) .song{
-  color:#e9e9ff;
-}
-
-.card:nth-child(4n + 3) .song{
-  color:#ffeaf2;
-}
-
-.card:nth-child(4n + 4) .song{
-  color:#f4e9dc;
-}
-
-.card .artist{
-  color:#cbbbd8;
-}
-
-.card:nth-child(4n + 3) .artist{
-  color:#d9b9cc;
-}
-
+.card .song{color:#fff9ff}
+.card:nth-child(4n + 2) .song{color:#f8f8ff}
+.card:nth-child(4n + 3) .song{color:#fff6f9}
+.card:nth-child(4n + 4) .song{color:#fffbf5}
+.card .artist{color:rgba(248,240,255,.84)}
+.card:nth-child(4n + 3) .artist{color:rgba(255,239,246,.86)}
 .card .cat{
-  background:rgba(207,174,226,.17);
-  color:#e7d5f2;
-  border:1px solid rgba(219,193,236,.14);
+  background:rgba(233,220,244,.06);
+  color:#fff8ff;
+  border:1px solid rgba(245,236,252,.14);
+  box-shadow:0 2px 8px rgba(5,0,12,.04);
 }
-
 .card:nth-child(4n + 2) .cat{
-  background:rgba(169,174,220,.16);
-  color:#dfe0fb;
-  border-color:rgba(190,194,235,.16);
+  background:rgba(216,222,246,.06);
+  color:#fafaff;
+  border-color:rgba(233,236,253,.14);
 }
-
 .card:nth-child(4n + 3) .cat{
-  background:rgba(218,164,193,.15);
-  color:#f4d8e5;
-  border-color:rgba(226,185,205,.16);
+  background:rgba(247,220,232,.06);
+  color:#fff7fa;
+  border-color:rgba(253,235,243,.14);
 }
-
 .card:nth-child(4n + 4) .cat{
-  background:rgba(210,184,148,.14);
-  color:#f0dfc8;
-  border-color:rgba(222,198,166,.15);
+  background:rgba(243,230,215,.05);
+  color:#fffaf4;
+  border-color:rgba(249,240,229,.13);
 }
-
 .card .decor-fish{
-  background:rgba(202,166,226,.13);
-  border-color:rgba(221,194,238,.22);
+  background:rgba(227,211,245,.04);
+  border-color:rgba(245,236,252,.14);
+  box-shadow:0 4px 12px rgba(5,0,12,.05);
+  opacity:.78;
 }
-
 .card:nth-child(4n + 2) .decor-fish{
-  background:rgba(166,172,220,.13);
-  border-color:rgba(190,195,235,.22);
+  background:rgba(213,221,245,.04);
+  border-color:rgba(233,236,253,.14);
 }
-
 .card:nth-child(4n + 3) .decor-fish{
-  background:rgba(218,160,190,.13);
-  border-color:rgba(230,188,207,.22);
+  background:rgba(245,216,230,.04);
+  border-color:rgba(253,235,243,.14);
 }
-
 .card:nth-child(4n + 4) .decor-fish{
-  background:rgba(211,182,143,.12);
-  border-color:rgba(225,200,169,.20);
+  background:rgba(241,226,210,.04);
+  border-color:rgba(249,240,229,.13);
 }
-
 .card .copy{
-  background:#634a78;
-  color:#f6edfc;
+  background:rgba(126,91,151,.58);
+  color:#fff9ff;
+  border:1px solid rgba(255,255,255,.08);
 }
-
-.card .copy:hover{
-  background:#7b5b91;
-}
-
-.card:nth-child(4n + 2) .copy{
-  background:#555778;
-}
-
-.card:nth-child(4n + 2) .copy:hover{
-  background:#6c6f98;
-}
-
-.card:nth-child(4n + 3) .copy{
-  background:#79516c;
-}
-
-.card:nth-child(4n + 3) .copy:hover{
-  background:#936781;
-}
-
-.card:nth-child(4n + 4) .copy{
-  background:#76634e;
-}
-
-.card:nth-child(4n + 4) .copy:hover{
-  background:#90795f;
-}
-
-.card .copy.done{
-  background:#9b78bc;
-  color:#fff;
-}
+.card .copy:hover{background:rgba(148,111,173,.68)}
+.card:nth-child(4n + 2) .copy{background:rgba(103,108,157,.58)}
+.card:nth-child(4n + 2) .copy:hover{background:rgba(124,130,181,.68)}
+.card:nth-child(4n + 3) .copy{background:rgba(153,99,133,.58)}
+.card:nth-child(4n + 3) .copy:hover{background:rgba(175,120,154,.68)}
+.card:nth-child(4n + 4) .copy{background:rgba(145,119,91,.58)}
+.card:nth-child(4n + 4) .copy:hover{background:rgba(166,139,109,.68)}
+.card .copy.done{background:rgba(165,126,197,.74);color:#fff}
