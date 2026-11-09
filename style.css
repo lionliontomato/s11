@@ -576,24 +576,25 @@ body{
 
 /* 歌曲卡片：以紫夜為主色，加入低飽和莓果、藍灰與暖香檳點綴 */
 .card{
-  background:linear-gradient(145deg,rgba(52,34,70,.94),rgba(31,21,45,.92));
-  border-color:rgba(214,190,231,.26);
+  background:linear-gradient(145deg,rgba(151,119,178,.54),rgba(83,58,105,.52));
+  border-color:rgba(226,207,241,.34);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
 }
 
 /* 低對比度的輪替色，讓卡片有層次但不跳出整體紫夜氛圍 */
 .card:nth-child(4n + 2){
-  background:linear-gradient(145deg,rgba(48,43,72,.94),rgba(28,25,48,.92));
-  border-color:rgba(174,174,218,.27);
+  background:linear-gradient(145deg,rgba(132,139,184,.53),rgba(69,68,112,.51));
+  border-color:rgba(207,211,244,.34);
 }
 
 .card:nth-child(4n + 3){
-  background:linear-gradient(145deg,rgba(68,39,67,.94),rgba(39,22,47,.92));
-  border-color:rgba(220,174,202,.26);
+  background:linear-gradient(145deg,rgba(173,117,153,.52),rgba(99,56,91,.50));
+  border-color:rgba(240,204,224,.34);
 }
 
 .card:nth-child(4n + 4){
-  background:linear-gradient(145deg,rgba(54,43,66,.94),rgba(34,27,46,.92));
-  border-color:rgba(201,183,218,.26);
+  background:linear-gradient(145deg,rgba(158,139,157,.52),rgba(86,70,97,.50));
+  border-color:rgba(230,215,235,.34);
 }
 
 .card .song{
